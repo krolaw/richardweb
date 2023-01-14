@@ -18,7 +18,7 @@
           <input type="number" name="ratio" id="ratio" value="0.5" step="0.01">
         </div>
         <div>
-          <label for="rotate">Rotation</label>
+          <label for="rotate">Rotation (deg)</label>
           <input type="number" name="rotate" id="rotate" value="0" step="0.1">
         </div>
 
@@ -45,6 +45,22 @@
         
       </div>
       <canvas id="drawing" width="600" height="600"></canvas>
+
+      <p>The algorithm is as follows:</p>
+      <ol>
+        <li>Create X points.</li>
+        <li>Start from the first point.</li>
+        <li>Randomly choose one of the points.</li>
+        <li>Move ratio * (distance from the point) towards the point.</li>
+        <li>Rotate x degrees around point.</li>
+        <li>Draw a dot.</li>
+        <li>Exit if the last 100 dots were already present.</li>
+        <li>Goto 3.</li>
+      </ol>
+
+      <p>It would appear that predictable patterns come from random numbers - or "chaos". In truth, some areas cannot be reached regardless of the points chosen and thus certain patterns are guaranteed. Some patterns rely on certain areas having a lower probability and hence you get different levels of "shading".</p>
+
+      <p>Chaos was written in rust using <a href="https://rustwasm.github.io/wasm-bindgen/examples/julia.html">The `wasm-bindgen` Guide's Julia example</a> as a starting point. Chaos source on <a href="https://github.com/krolaw/richardweb/blob/main/chaos/src/lib.rs">GitHub</a>.</p>
     </main>
   </body>
 </html>
