@@ -1,12 +1,9 @@
 body {
   padding: 1em;
-  display: flex;
-  justify-content: center;
 }
 
-.controls {
-  display: flex;
-  align-items: flex-end;
+.controls > * {
+  display: inline-block;
   margin-bottom: 1em;
 }
 
