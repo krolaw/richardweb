@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="skeleton.css">
+    <link rel="stylesheet" href="normalize.css">
+  </head>
+  <body>
+    <main>
+      <div class="controls">
+        <h1>Chaos</h1>
+        <div>
+          <label for="points">Points</label>
+          <input type="number" name="points" id="points" value="3" step="1">
+        </div>
+        <div>
+          <label for="ratio">Ratio</label>
+          <input type="number" name="ratio" id="ratio" value="0.5" step="0.01">
+        </div>
+        <div>
+          <label for="rotate">Rotation</label>
+          <input type="number" name="rotate" id="rotate" value="0" step="0.1">
+        </div>
+
+        <div>
+          <label for="preset">Preset</label>
+          <select id="preset">
+            <option>3,0.5</option>
+            <option>3,0.39</option>
+            <option>3,0.35,30</option>
+            <option>4,0.52</option>
+            <option>5,0.5</option>
+            <option>5,0.62</option>
+            <option>5,0.55,20</option>
+            <option>6,0.5</option>
+            <option>7,0.55</option>
+            <option>7,0.694</option>
+            <option>20,0.84</option>
+            <option>1000,0.99999</option>
+
+          </select>
+        </div>
+
+        <button class="button-primary" id="render">Render</button>
+        
+      </div>
+      <canvas id="drawing" width="600" height="600"></canvas>
+    </main>
+  </body>
+</html>
