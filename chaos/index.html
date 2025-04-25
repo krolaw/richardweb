@@ -7,7 +7,7 @@
             var memory = new WebAssembly.Memory({
                 // See build.zig for reasoning
                 initial: 8 /* pages */,
-                maximum: 512 /* pages */,
+                maximum: 10240 /* pages */,
             });
 
             var importObject = {
@@ -18,17 +18,11 @@
             };
 
             WebAssembly.instantiateStreaming(fetch("zig-out/bin/chaos.wasm"), importObject).then((result) => {
-                // Automatically set canvas size as defined in `chaos.zig`
-
                 const dpr = window.devicePixelRatio || 1;
                 const canvas = document.getElementById("canvas");
-                const canvas_size = canvas.getBoundingClientRect().width * dpr;
+                const canvas_size = Math.min(10000, Math.floor(canvas.getBoundingClientRect().width) * dpr);
                 canvas.width = canvas_size;
                 canvas.height = canvas_size;
-
-                context = canvas.getContext("2d");
-                imageData = context.createImageData(canvas_size, canvas_size);
-                context.clearRect(0, 0, canvas_size, canvas_size);
 
                 const pointsInput = document.getElementById("points");
                 const ratioInput = document.getElementById("ratio");
@@ -37,6 +31,10 @@
 
                 const render = (event) => {
                     event?.preventDefault();
+
+                    const context = canvas.getContext("2d");
+                    const imageData = context.createImageData(canvas_size, canvas_size);
+                    context.clearRect(0, 0, canvas_size, canvas_size);
 
                     const bufferOffset = result.instance.exports.drawChaos(
                         canvas_size,
@@ -70,8 +68,18 @@
             });
         </script>
         <style>
-            body {
+            html {
                 text-align: center;
+                font-size: 14pt;
+            }
+
+            form *,
+            form label,
+            form input {
+                font-size: 28pt;
+            }
+            label {
+                display: inline-block;
             }
             p,
             ol {
@@ -144,8 +152,7 @@
         <p>
             Chaos was written in <a href="https://ziglang.org/">Zig</a> (because it's very fast and I like Zig) using
             <a href="https://github.com/daneelsan/minimal-zig-wasm-canvas">minimal-zig-wasm-canvas</a> as a starting
-            point. Chaos source on
-            <a href="https://github.com/krolaw/richardweb/blob/main/chaos/src/chaos.zig">GitHub</a>.
+            point. Chaos source on <a href="https://github.com/krolaw/richardweb/chaos/src/chaos.zig">GitHub</a>.
         </p>
     </body>
 </html>
