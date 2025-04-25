@@ -27,7 +27,7 @@
                 const pointsInput = document.getElementById("points");
                 const ratioInput = document.getElementById("ratio");
                 const rotateInput = document.getElementById("rotation");
-                const zoomInput = document.getElementById("zoom");
+                const scaleInput = document.getElementById("scale");
 
                 const render = (event) => {
                     event?.preventDefault();
@@ -41,7 +41,7 @@
                         parseInt(pointsInput.value),
                         parseFloat(ratioInput.value),
                         parseFloat(rotateInput.value),
-                        parseFloat(zoomInput.value),
+                        parseFloat(scaleInput.value),
                     );
                     const wasmMemoryArray = new Uint8Array(memory.buffer);
                     const imageDataArray = wasmMemoryArray.slice(
@@ -57,7 +57,7 @@
                     pointsInput.value = z[0];
                     ratioInput.value = z[1];
                     rotateInput.value = z.length > 2 ? z[2] : 0;
-                    zoomInput.value = z.length > 3 ? z[3] : 1;
+                    scaleInput.value = z.length > 3 ? z[3] : 1;
                     render();
                 });
 
@@ -104,7 +104,7 @@
             <label>Points:&nbsp;<input id="points" type="number" max="1000" min="3" step="1" value="3" /></label>
             <label>Ratio:&nbsp;<input id="ratio" type="number" min="0" max="1" value="0.5" step="0.0001" /></label>
             <label>Rotation:&nbsp;<input id="rotation" type="number" value="0.0" step="0.0001" /></label>
-            <label>Zoom:&nbsp;<input id="zoom" type="number" value="1.0" step="0.0001" /></label>
+            <label>Scale:&nbsp;<input id="scale" type="number" value="1.0" step="0.0001" /></label>
             <label
                 >Preset:&nbsp;<select id="preset">
                     <option>3,0.5</option>
@@ -120,6 +120,7 @@
                     <option>6,0.5,36,0.82</option>
                     <option>7,0.55</option>
                     <option>7,0.694</option>
+                    <option>9,0.6,180,0.43</option>
                     <option>20,0.84</option>
                     <option>1000,0.5</option>
                     <option>1000,0.99999</option>
